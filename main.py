@@ -4,21 +4,33 @@ def get_book_text(filepath):
     with open(filepath) as f:
         return f.read()
 
+def menu(text):
+     while True:
+        print("""Select 1 to summarize the content of the book provided
+        Select 2 to get the count of each character used in the book
+        Select 3 to exit the program""")
+        choice=input("Enter your choice:")
+        if choice=='3':
+            sys.exit(0)
+        elif choice=='2':
+            count=count_words(text)
+            count_char=count_characters(text)
+            print("============ BOOKBOT ============\n"
+f"Analyzing book found at {sys.argv[1]}...\n"
+"----------- Word Count ----------\n"
+f"Found {count} total words\n"
+"--------- Character Count -------")
+            sorted_list=sort_dictionary(count_char)
+            for k in sorted_list:
+                if k["char"].isalpha():
+                    print(f"{k['char']}: {k['num']}")
+        else:
+
+
 def main():
     if len(sys.argv)<2:
         print("Usage: python3 main.py <path_to_book>")
         sys.exit(1)
     book_text = get_book_text(sys.argv[1])
-    count=count_words(book_text)
-    count_char=count_characters(book_text)
-
-    print("============ BOOKBOT ============\n"
-"Analyzing book found at books/frankenstein.txt...\n"
-"----------- Word Count ----------\n"
-"Found",count,"total words\n"
-"--------- Character Count -------")
-    sorted_list=sort_dictionary(count_char)
-    for k in sorted_list:
-        if k["char"].isalpha():
-            print(f"{k['char']}: {k['num']}")
+    menu(book_text) 
 main()
