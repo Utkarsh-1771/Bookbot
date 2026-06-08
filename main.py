@@ -1,5 +1,5 @@
 import sys
-from stats import count_words,count_characters,sort_dictionary
+from stats import count_words,count_characters,sort_dictionary,summarize_text
 def get_book_text(filepath):
     with open(filepath) as f:
         return f.read()
@@ -24,8 +24,11 @@ f"Found {count} total words\n"
             for k in sorted_list:
                 if k["char"].isalpha():
                     print(f"{k['char']}: {k['num']}")
+        elif choice=='1':
+            summary=summarize_text(text)
+            print(summary)
         else:
-
+            print("Invalid Choice")
 
 def main():
     if len(sys.argv)<2:
